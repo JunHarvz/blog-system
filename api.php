@@ -9,7 +9,7 @@ $post = new Post($pdo);
 $method = $_SERVER["REQUEST_METHOD"];
 $uri = $_SERVER["REQUEST_URI"]; 
 $uri = explode("?", $uri)[0]; // remove query params
-$uri = str_replace("/blog/backend/api.php", "", $uri); // remove prefix to redefine routing
+$uri = str_replace("/blog/api.php", "", $uri); // remove prefix to redefine routing
 
 //Uses try/catch for error handling
 try {
