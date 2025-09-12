@@ -11,17 +11,17 @@
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<body class="bg-light">
+<body class="bg-dark text-light" data-bs-theme="dark">
 
 <div class="container mt-4">
-  <h2 class="mb-4">📌 Blog Dashboard</h2>
+  <h2 class="mb-4">Blog Dashboard</h2>
 
   <!-- Alerts -->
   <div id="alert-container"></div>
 
   <!-- Create Post Form -->
   <div class="card mb-4">
-    <div class="card-header">Create New Post</div>
+    <div class="card-header">Create Post</div>
     <div class="card-body">
       <form id="postForm">
         <div class="mb-3">
