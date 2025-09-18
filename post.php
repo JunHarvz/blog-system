@@ -6,6 +6,7 @@ class Post {
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
+    
     // Get data from database
     public function getAll() {
         
@@ -14,8 +15,12 @@ class Post {
     }
     // Insert data to database
     public function create($title, $body) {
-        if (empty($title) || empty($body)) {
-            throw new Exception("Title and body are required");
+        //Input Validation via backend for security
+        if (empty($title)) {
+            throw new Exception("Title is required");
+        }
+        if (strlen($body) < 100 || empty($body)) {
+            throw new Exception("Body must have 100 or more characters");
         }
 
         $sql = "INSERT INTO posts (title, body) VALUES (:title, :body)";
@@ -24,7 +29,7 @@ class Post {
             ":title" => $title,
             ":body"  => $body
         ]);
-
+        
         return $this->pdo->lastInsertId();
     }
 

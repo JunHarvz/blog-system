@@ -6,10 +6,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Blog Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+  /* Small tweak for table on mobile */
+  .table-responsive { overflow-x: auto; }
+</style>
+
 </head>
 <body class="bg-dark text-light" data-bs-theme="dark">
 
@@ -26,11 +33,13 @@
       <form id="postForm">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
-          <input type="text" id="title" name="title" class="form-control" required>
+          <input type="text" id="title" name="title" class="form-control">
         </div>
         <div class="mb-3">
           <label for="body" class="form-label">Body</label>
-          <textarea id="body" name="body" class="form-control" rows="3" required></textarea>
+          <small>(minimum of 100 characters)</small>
+          <textarea id="body" name="body" class="form-control" rows="3"></textarea>
+          <small id="bodyCounter" class="text-danger">0 / 100 characters</small>
         </div>
         <button type="submit" class="btn btn-primary">Add Post</button>
       </form>
@@ -66,8 +75,7 @@
   </div>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
 $(document).ready(function() {
@@ -109,7 +117,9 @@ $(document).ready(function() {
               <tr>
                 <td>${post.id}</td>
                 <td>${post.title}</td>
-                <td>${post.body}</td>
+                <td class="text-wrap" style="max-width:250px; word-wrap:break-word; white-space:normal;">
+                  ${post.body}
+                </td>
                 <td>${post.created_at}</td>
                 <td>
                   <button class="btn btn-danger btn-sm delete-btn" data-id="${post.id}">Delete</button>
@@ -130,16 +140,17 @@ $(document).ready(function() {
         });
     }
 
-    //Load posts initially
+    //Invoke function initially to load posts
     loadPosts();
 
     //Create Post (AJAX)
     $("#postForm").submit(function(e) {
         e.preventDefault();
+        
         const postData = {
             title: $("#title").val(),
             body: $("#body").val()
-        };
+        };      
 
         $.ajax({
             url: API_URL + "/posts",
@@ -149,13 +160,31 @@ $(document).ready(function() {
             success: function(res) {
                 showAlert("success", res.message);
                 $("#postForm")[0].reset();
+                $("#bodyCounter")
+                  .text("0 / 100 characters")
+                  .removeClass("text-success")
+                  .addClass("text-danger");
                 loadPosts();
+                
             },
             error: function(xhr) {
                 const errorMsg = xhr.responseJSON?.error || "Failed to create post.";
                 showAlert("danger", errorMsg);
             }
         });
+    });
+
+    // Live character counter for Body
+    $("#body").on("input", function() {
+        const len = $(this).val().length;
+        const minChars = 100;
+        $("#bodyCounter").text(len + " / " + minChars + " characters");
+
+        if (len < minChars) {
+            $("#bodyCounter").addClass("text-danger");
+        } else {
+            $("#bodyCounter").removeClass("text-danger").addClass("text-success");
+        }
     });
 
     //Delete Post (AJAX with confirmation)
