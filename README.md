@@ -3,12 +3,12 @@ Simple Blog System (PHP + jQuery + Bootstrap)
 A lightweight blog system built with PHP, PDO, jQuery, and Bootstrap.
 
 Features:
-API with CRUD operations (GET, POST, DELETE)
-Single-page dashboard with AJAX (list, create, delete posts)
-Search + sort (client-side)
-Validation (title required, body ≥ 100 chars)
-Mobile-friendly layout
-Character counter for post body
+API with CRUD operations (GET, POST, DELETE). 
+Single-page dashboard with AJAX (list, create, delete posts). 
+Search + sort (client-side). 
+Validation (title required, body ≥ 100 chars). 
+Mobile-friendly layout. 
+Character counter for post body. 
 
 Set-up Instructions
 1. Clone 
