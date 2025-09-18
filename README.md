@@ -12,7 +12,7 @@ Character counter for post body
 
 Set-up Instructions
 1. Clone 
-    git clone https://github.com/yourusername/blog-system.git
+    git clone https://github.com/junharvz/blog-system.git
     cd blog-system
 2. Create a new MySQL/MariaDB database and run:
     CREATE DATABASE blogdb;
