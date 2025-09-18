@@ -31,15 +31,8 @@ Set-up Instructions
     "password" => ""
 4. Place the project in your web server’s root folder (e.g. htdocs for XAMPP or www for WAMP).
    Then open in browser: http://localhost/blog-system/index.php
-5. Make sure to have this file structure:
-   blog-system/
-        │── index.php      # Dashboard (UI with Bootstrap + jQuery)
-        │── app.js         # JavaScript (AJAX, validation, UI logic)
-        │── db.php         # Database connection (PDO + prepared-statement)
-        │── Post.php       # Post model (CRUD logic)
-        │── api.php        # API router (handles requests)
-        │── README.md      # Documentation
-6. Done! The blog system is ready.
+   
+5. Done! The blog system is ready.
 
 
 
