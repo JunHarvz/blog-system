@@ -11,28 +11,29 @@ Mobile-friendly layout.
 Character counter for post body. 
 
 Set-up Instructions
-1. Clone 
-    git clone https://github.com/junharvz/blog-system.git
-    cd blog-system
-2. Create a new MySQL/MariaDB database and run:
-    CREATE DATABASE blogdb;
-    USE blog-database;
-    
-    CREATE TABLE posts (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        body TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-3. Edit config.php and update your credentials:
-    "host" => "localhost",
-    "db" => "blog_database",
-    "user" => "root",
-    "password" => ""
-4. Place the project in your web server’s root folder (e.g. htdocs for XAMPP or www for WAMP).
-   Then open in browser: http://localhost/blog-system/index.php
+1. Install WampServer
+    Link: https://sourceforge.net/projects/wampserver/
+    Install all required C++ Redist in order to complete the installation
+2. Make sure you already have Git in your system. 
+    If not, you can download it here: https://git-scm.com/downloads
+3. After installing WampServer, locate "wamp64/www"
+4. Clone the GitHub repo from www.github.com/junharvz/blog-system
+    Open Git Bash
+    Run: git clone https://github.com/JunHarvz/blog-system
+    After the process, locate the "blog-system" folder and paste in inside "www" folder
+5. Run WampServer
+6. In your browser, go to http://localhost/phpmyadmin
+7. You will be sent to PhpMyAdmin Database. set username to "root" and empty password.
+    Click Login.
+8. Create New Database and name it "blog_database"
+9. Navigate to the Import tab
+10. Choose the file "blog_database.sql" inside "blog-system" folder
+11. Scroll down and click the "Import" or "Go" button to begin the import process.
+     After importing, you can see the "post" table.
+12. Open another tab and run http://localhost/blog-system
+13. Test the system.
+
    
-5. Done! The blog system is ready.
 
 
 
